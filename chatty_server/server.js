@@ -34,7 +34,6 @@ wss.on('connection',(ws) => {
     ws.on('message',(data) => {
         const message = JSON.parse(data);
         message.id = uuid.v4();
-        // console.log(message);
         const image_url = message.content.match(new RegExp(/(https?:\/\/.+\/.+(.jpg|.gif|.png))/));
         if (image_url) {
             console.log('Deu math',image_url);
