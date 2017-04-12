@@ -12,10 +12,8 @@ const appData = {
 class App extends Component {
 
   handleMessage = (message) => {
-    console.log(message);
     if (message.type === 'maintenance') {
       this.setState(message);
-      console.log('State:',this.state);
     } 
     else {
       this.state.messages.push(message);
@@ -23,7 +21,6 @@ class App extends Component {
     }
   }
   sendMessageToSocket = (message) => {
-    console.log('Sending to socket',message);
     this.ws.send(JSON.stringify(message));
   }
   constructor(props) {

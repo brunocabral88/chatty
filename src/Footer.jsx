@@ -10,6 +10,7 @@ class Footer extends Component {
 	}
 	handleTextChange = (ev) => {
 		if (ev.key === 'Enter' && this.state.content) {
+			console.log(this.state);
 			this.props.sendMessageToSocket(this.state);
 			ev.target.value = '';
 			this.setState({content: null});
@@ -20,8 +21,11 @@ class Footer extends Component {
 
 	handleUserChange = (ev) => {
 		if (ev.target.value !== this.state.username) {
-			this.props.sendMessageToSocket({ type: 'notification', content: `User ${this.state.username} changed their name to ${ev.target.value}.` });
-			this.setState({ username: ev.target.value });
+			if (this.state.username == "Anonymous" && ev.target.value == "") {
+				return false;
+			}
+			this.props.sendMessageToSocket({ type: 'notification', content: `User ${this.state.username} changed their name to ${(ev.target.value || "Anonymous")}.` });
+			this.setState({ username: (ev.target.value || "Anonymous") });
 		}
 	}
 	render() {
